@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			demo: [
 				{
-					title: "FIRST",
+					title: "fourth",
 					background: "white",
 					initial: "white"
 				},
@@ -11,8 +11,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					title: "SECOND",
 					background: "white",
 					initial: "white"
+				},
+				{
+					title: "first",
+					background: "white",
+					initial: "white"
 				}
-			]
+			],
+
+			home: "This is my new home"
+	
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
