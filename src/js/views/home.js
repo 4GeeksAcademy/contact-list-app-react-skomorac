@@ -4,9 +4,11 @@ import "../../styles/home.css";
 import { Context } from "../store/appContext";
 
 
-export const Home = () => (
+export const Home = () => {
 	const { store, actions } = useContext(Context);
 
+	return (
+		
 	<div className="text-center mt-5">
 		<h1>Hello Rigo!</h1>
 		<p>
@@ -17,4 +19,6 @@ export const Home = () => (
 		</a>
 		<p>{store.home}</p>
 	</div>
-);
+
+	)
+}

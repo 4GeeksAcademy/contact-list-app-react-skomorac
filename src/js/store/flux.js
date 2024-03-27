@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			demo: [
 				{
-					title: "fourth",
+					title: "FIRST",
 					background: "white",
 					initial: "white"
 				},
@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				},
 				{
-					title: "first",
+					title: "THIRD",
 					background: "white",
 					initial: "white"
 				}
