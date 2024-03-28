@@ -22,39 +22,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       contacts: [], // Initialize an empty array for contacts
     },
     actions: {
-      addContactToList: async () => {
-        try {
-          const response = await fetch(
-            "https://playground.4geeks.com/apis/fake/contact",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                full_name: "Admir Skomorac",
-                email: "skomi@gmail.com",
-                agenda_slug: "Skomorac_agenda",
-                address: "47568 NW 34ST, 33434 FL, USA",
-                phone: "+38706012345678",
-              }),
-            }
-          );
-
-          if (!response.ok) {
-            throw new Error(
-              "Failed to retrieve contact list: " + response.statusText
-            );
-          }
-
-          const data = await response.json();
-          setStore({ contacts: data }); // Update store with fetched contacts
-        } catch (error) {
-          console.error("Error retrieving contact list:", error.message);
-          throw new Error("Error retrieving contact list: " + error.message);
-        }
-      },
-
       getContactList: async () => {
         try {
           const response = await fetch(
