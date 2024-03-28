@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import "../../styles/addContact.css";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router";
 
 export const AddContact = () => {
+  const navigate = useNavigate();
   const { actions } = useContext(Context);
   const [contact, setContact] = useState({
     full_name: "",
     address: "",
     phone: "",
-    email: ""
+    email: "",
   });
 
   const handleInputChange = (e) => {
@@ -19,6 +21,7 @@ export const AddContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      navigate("/");
       await actions.addContact(contact);
       // Optionally, you can redirect the user to another page after adding the contact
     } catch (error) {
