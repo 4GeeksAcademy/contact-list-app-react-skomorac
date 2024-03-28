@@ -1,0 +1,51 @@
+.contact {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+}
+
+.contact img {
+  width: 100px; /* Adjust size as needed */
+  height: 100px; /* Adjust size as needed */
+  border-radius: 50%; /* To create a circular border */
+  margin-right: 20px;
+}
+
+.contact-info {
+  flex: 1; /* Take remaining space */
+  text-align: left;
+  color: rgb(99, 99, 104);
+}
+
+.contact-info h3 {
+  color: rgb(44, 44, 48);
+}
+
+.contact-info i {
+  padding-right: 10px;
+}
+
+.contact-actions {
+  display: flex;
+  align-items: center; /* Align buttons vertically */
+}
+
+.contact-actions button {
+  margin-right: 10px; /* Add space between buttons */
+  border: none;
+  background-color: white;
+}
+
+/* Add some space between the contact information and the buttons */
+.contact-info {
+  margin-right: 20px;
+}
+
+.addContactBtn {
+  text-decoration: none;
+}
