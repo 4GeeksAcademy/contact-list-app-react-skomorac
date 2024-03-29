@@ -21,12 +21,24 @@ export const AddContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Create a new contact object based on form input
+      const newContact = {
+        full_name: contact.full_name,
+        address: contact.address,
+        phone: contact.phone,
+        email: contact.email,
+      };
+
+      // Call the addContact action
+      await actions.addContact(newContact);
+
+      // Redirect to the home page
       navigate("/");
-      await actions.addContact(contact);
-      // Optionally, you can redirect the user to another page after adding the contact
+      // rerender home page to show new contacts
+      await actions.getContactList();
     } catch (error) {
       console.error("Error adding contact:", error.message);
-      // Handle error
+      // Handle the error gracefully
     }
   };
 
