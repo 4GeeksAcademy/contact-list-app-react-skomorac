@@ -1,13 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
+import EditContactModal from "./EditContactModal";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedContact, setSelectedContact] = useState(null);
 
   const handleDeleteContact = (contactId) => {
     actions.deleteContact(contactId);
+  };
+
+  const handleEditContact = (contact) => {
+    setSelectedContact(contact);
+    setShowModal(true);
+  };
+
+  const handleSaveEditedContact = (editedContact) => {
+    actions.editContact(editedContact);
+    setShowModal(false);
   };
 
   return (
@@ -40,7 +53,7 @@ export const Home = () => {
               </p>
             </div>
             <div className="contact-actions">
-              <button>
+              <button onClick={() => handleEditContact(contact)}>
                 <i className="fas fa-pen"></i>
               </button>
               <button onClick={() => handleDeleteContact(contact.id)}>
@@ -50,6 +63,13 @@ export const Home = () => {
           </div>
         ))}
       </div>
+      {showModal && (
+        <EditContactModal
+          contact={selectedContact}
+          onSave={handleSaveEditedContact}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };

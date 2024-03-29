@@ -66,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             // Optionally, you can throw a custom error here
           } else {
             // Contact added successfully, update the contact list
-            await actions.getContactList();
+            await getActions().getContactList();
           }
         } catch (error) {
           // Handle any other errors
@@ -101,6 +101,35 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error("Error deleting contact:", error.message);
           throw new Error("Error deleting contact: " + error.message);
+        }
+      },
+
+      editContact: async (editedContact) => {
+        try {
+          // Make a PUT request to update the contact
+          const response = await fetch(
+            `https://playground.4geeks.com/apis/fake/contact/${editedContact.id}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(editedContact),
+            }
+          );
+
+          if (!response.ok) {
+            // Handle the error gracefully
+            console.error("Failed to edit contact:", response.statusText);
+            // Optionally, you can throw a custom error here
+          } else {
+            // Contact edited successfully, update the contact list
+            await getActions().getContactList();
+          }
+        } catch (error) {
+          // Handle any other errors
+          console.error("Error editing contact:", error.message);
+          // Optionally, you can throw a custom error here
         }
       },
     },
