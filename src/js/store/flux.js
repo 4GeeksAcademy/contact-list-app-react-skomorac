@@ -13,11 +13,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           background: "white",
           initial: "white",
         },
-        {
-          title: "THIRD",
-          background: "white",
-          initial: "white",
-        },
       ],
       contacts: [], // Initialize an empty array for contacts
     },
@@ -52,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           // Set agenda_slug for the new contact
           newContact.agenda_slug = "Skomorac_agenda";
-      
+
           // Make a POST request to add the contact
           const response = await fetch(
             "https://playground.4geeks.com/apis/fake/contact",
@@ -64,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               body: JSON.stringify(newContact),
             }
           );
-      
+
           if (!response.ok) {
             // Handle the error gracefully
             console.error("Failed to add contact:", response.statusText);
@@ -79,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           // Optionally, you can throw a custom error here
         }
       },
-      
+
       deleteContact: async (contactId) => {
         try {
           const response = await fetch(
