@@ -13,6 +13,7 @@ export const AddContact = () => {
     phone: "",
     email: "",
   });
+  const [warning, setWarning] = useState("");
 
   const handleInputChange = (e) => {
     setContact({ ...contact, [e.target.id]: e.target.value });
@@ -20,6 +21,18 @@ export const AddContact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate the form
+    if (!contact.name.trim()) {
+      setWarning("Name is required.");
+      return;
+    }
+
+    if (!contact.email.trim() || !contact.email.includes("@")) {
+      setWarning("Please provide a valid email address.");
+      return;
+    }
+
     try {
       // Create a new contact object based on form input
       const newContact = {
@@ -34,6 +47,7 @@ export const AddContact = () => {
 
       // Redirect to the home page
       navigate("/");
+
       // rerender home page to show new contacts
       await actions.getContactList();
     } catch (error) {
@@ -90,6 +104,7 @@ export const AddContact = () => {
             onChange={handleInputChange}
           />
         </div>
+        {warning && <div className="alert alert-warning">{warning}</div>}
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
