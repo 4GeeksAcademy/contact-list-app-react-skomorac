@@ -8,7 +8,7 @@ export const AddContact = () => {
   const navigate = useNavigate();
   const { actions } = useContext(Context);
   const [contact, setContact] = useState({
-    full_name: "",
+    name: "",
     address: "",
     phone: "",
     email: "",
