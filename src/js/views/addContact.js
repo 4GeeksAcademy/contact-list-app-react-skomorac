@@ -16,7 +16,18 @@ export const AddContact = () => {
   const [warning, setWarning] = useState("");
 
   const handleInputChange = (e) => {
-    setContact({ ...contact, [e.target.id]: e.target.value });
+    const { id, value } = e.target;
+
+    // Validate phone number format
+    if (id === "phone" && !/^(\+)?\d*$/.test(value)) {
+      setWarning(
+        "Please enter a valid phone number starting with '+' and containing only numbers."
+      );
+    } else {
+      setWarning(""); // Clear warning if format is correct
+    }
+
+    setContact({ ...contact, [id]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -109,7 +120,10 @@ export const AddContact = () => {
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
-          <Link to="/" className="btn btn-warning">Go back home</Link> {/* Add Link to go back home */}
+          <Link to="/" className="btn btn-warning">
+            Go back home
+          </Link>{" "}
+          {/* Add Link to go back home */}
         </div>
       </form>
     </div>
