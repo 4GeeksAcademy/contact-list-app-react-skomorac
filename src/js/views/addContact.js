@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../styles/addContact.css";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router-dom"; // Import Link from react-router-dom
 
 export const AddContact = () => {
   const navigate = useNavigate();
@@ -105,9 +105,12 @@ export const AddContact = () => {
           />
         </div>
         {warning && <div className="alert alert-warning">{warning}</div>}
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div className="d-flex justify-content-between align-items-center">
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+          <Link to="/" className="btn btn-warning">Go back home</Link> {/* Add Link to go back home */}
+        </div>
       </form>
     </div>
   );
