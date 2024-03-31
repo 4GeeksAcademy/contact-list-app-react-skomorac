@@ -3,24 +3,32 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
 import EditContactModal from "./EditContactModal";
+import DeleteContactModal from "./DeleteContactModal"; // Import DeleteContactModal here
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // State for showing delete modal
   const [selectedContact, setSelectedContact] = useState(null);
 
   const handleDeleteContact = (contactId) => {
     actions.deleteContact(contactId);
+    setShowDeleteModal(false); // Close delete modal after deletion
   };
 
   const handleEditContact = (contact) => {
     setSelectedContact(contact);
-    setShowModal(true);
+    setShowEditModal(true);
   };
 
   const handleSaveEditedContact = (editedContact) => {
     actions.editContact(editedContact);
-    setShowModal(false);
+    setShowEditModal(false);
+  };
+
+  const handleShowDeleteModal = (contact) => {
+    setSelectedContact(contact);
+    setShowDeleteModal(true);
   };
 
   return (
@@ -56,18 +64,27 @@ export const Home = () => {
               <button onClick={() => handleEditContact(contact)}>
                 <i className="fas fa-pen"></i>
               </button>
-              <button onClick={() => handleDeleteContact(contact.id)}>
+              <button onClick={() => handleShowDeleteModal(contact)}>
+                {" "}
+                {/* Call function to show delete modal */}
                 <i className="fas fa-trash"></i>
               </button>
             </div>
           </div>
         ))}
       </div>
-      {showModal && (
+      {showEditModal && (
         <EditContactModal
           contact={selectedContact}
           onSave={handleSaveEditedContact}
-          onClose={() => setShowModal(false)}
+          onClose={() => setShowEditModal(false)}
+        />
+      )}
+      {showDeleteModal && (
+        <DeleteContactModal
+          show={showDeleteModal}
+          onClose={() => setShowDeleteModal(false)}
+          onDelete={() => handleDeleteContact(selectedContact.id)} // Pass onDelete function to handle deletion
         />
       )}
     </div>
