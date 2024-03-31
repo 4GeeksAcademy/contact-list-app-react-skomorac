@@ -21,14 +21,14 @@ const EditContactModal = ({ contact, onSave, onClose }) => {
         </span>
         <h2>Edit Contact</h2>
         <div className="input-container">
-          <label className="label" htmlFor="full_name">
+          <label className="label" htmlFor="name">
             Name and Surname
           </label>
           <input
             className="input-field"
             type="text"
-            id="full_name"
-            value={editedContact.full_name}
+            id="name"
+            value={editedContact.name}
             onChange={handleInputChange}
           />
         </div>

@@ -40,7 +40,7 @@ export const Home = () => {
               alt="Contact"
             />
             <div className="contact-info">
-              <h3>{contact.full_name}</h3>
+              <h3>{contact.name}</h3>
               <p>
                 <i className="fas fa-map-marker-alt"></i> Address:{" "}
                 {contact.address}

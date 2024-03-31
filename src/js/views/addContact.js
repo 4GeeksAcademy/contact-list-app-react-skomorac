@@ -23,7 +23,7 @@ export const AddContact = () => {
     try {
       // Create a new contact object based on form input
       const newContact = {
-        full_name: contact.full_name,
+        name: contact.name,
         address: contact.address,
         phone: contact.phone,
         email: contact.email,
@@ -47,13 +47,13 @@ export const AddContact = () => {
       <h1 className="formTitle">Add a new contact</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="full_name">Name and Surname</label>
+          <label htmlFor="name">Name and Surname</label>
           <input
             type="text"
             className="form-control"
-            id="full_name"
+            id="name"
             placeholder="Enter Name and Surname"
-            value={contact.full_name}
+            value={contact.name}
             onChange={handleInputChange}
           />
         </div>

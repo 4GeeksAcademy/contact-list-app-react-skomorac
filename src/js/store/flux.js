@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       getContactList: async () => {
         try {
           const response = await fetch(
-            "https://playground.4geeks.com/apis/fake/contact/agenda/Skomorac_agenda",
+            "https://playground.4geeks.com/contact/agendas/{Skomorac}/contacts",
             {
               method: "GET",
               headers: {
@@ -36,7 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
 
           const data = await response.json();
-          setStore({ contacts: data }); // Update store with fetched contacts
+          setStore({ contacts: data.contacts }); // Assign fetched contacts to the contacts property
         } catch (error) {
           console.error("Error retrieving contact list:", error.message);
           throw new Error("Error retrieving contact list: " + error.message);
@@ -46,11 +46,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       addContact: async (newContact) => {
         try {
           // Set agenda_slug for the new contact
-          newContact.agenda_slug = "Skomorac_agenda";
+          // newContact.agenda_slug = "Skomorac_agenda";
 
           // Make a POST request to add the contact
           const response = await fetch(
-            "https://playground.4geeks.com/apis/fake/contact",
+            "https://playground.4geeks.com/contact/agendas/{Skomorac}/contacts",
             {
               method: "POST",
               headers: {
@@ -78,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       deleteContact: async (contactId) => {
         try {
           const response = await fetch(
-            `https://playground.4geeks.com/apis/fake/contact/${contactId}`,
+            `https://playground.4geeks.com/contact/agendas/{Skomorac}/contacts/${contactId}`,
             {
               method: "DELETE",
             }
@@ -108,7 +108,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           // Make a PUT request to update the contact
           const response = await fetch(
-            `https://playground.4geeks.com/apis/fake/contact/${editedContact.id}`,
+            `https://playground.4geeks.com/contact/agendas/{Skomorac}/contacts/${editedContact.id}`,
             {
               method: "PUT",
               headers: {
