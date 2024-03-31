@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/modal.css";
 
 const EditContactModal = ({ contact, onSave, onClose }) => {
@@ -12,6 +12,24 @@ const EditContactModal = ({ contact, onSave, onClose }) => {
     onSave(editedContact);
     onClose();
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSave();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyPressEvent = (e) => {
+      handleKeyPress(e);
+    };
+
+    document.addEventListener("keypress", handleKeyPressEvent);
+
+    return () => {
+      document.removeEventListener("keypress", handleKeyPressEvent);
+    };
+  }, [handleKeyPress]);
 
   return (
     <div className="modal">
@@ -30,6 +48,7 @@ const EditContactModal = ({ contact, onSave, onClose }) => {
             id="name"
             value={editedContact.name}
             onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
           />
         </div>
         <div className="input-container">
@@ -42,6 +61,7 @@ const EditContactModal = ({ contact, onSave, onClose }) => {
             id="address"
             value={editedContact.address}
             onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
           />
         </div>
         <div className="input-container">
@@ -54,6 +74,7 @@ const EditContactModal = ({ contact, onSave, onClose }) => {
             id="phone"
             value={editedContact.phone}
             onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
           />
         </div>
         <div className="input-container">
@@ -66,6 +87,7 @@ const EditContactModal = ({ contact, onSave, onClose }) => {
             id="email"
             value={editedContact.email}
             onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
           />
         </div>
         <button onClick={handleSave}>Save</button>
