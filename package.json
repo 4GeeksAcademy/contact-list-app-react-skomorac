@@ -1,7 +1,7 @@
 {
 	"name": "react-hello-webapp",
 	"engines": {
-		"node": "16.x"
+		"node": "20.x"
 	},
 	"version": "1.0.1",
 	"description": "",
@@ -74,6 +74,7 @@
 		]
 	},
 	"dependencies": {
+		"@vercel/analytics": "^1.2.2",
 		"bootstrap": "^5.3.3",
 		"prop-types": "^15.7.2",
 		"query-string": "^7.0.1",
