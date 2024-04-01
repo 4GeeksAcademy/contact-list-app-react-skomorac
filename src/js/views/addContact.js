@@ -122,8 +122,7 @@ export const AddContact = () => {
           </button>
           <Link to="/" className="btn btn-warning">
             Go back home
-          </Link>{" "}
-          {/* Add Link to go back home */}
+          </Link>
         </div>
       </form>
     </div>
