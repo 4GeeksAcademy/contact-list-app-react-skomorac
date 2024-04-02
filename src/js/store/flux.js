@@ -1,48 +1,63 @@
 const getState = ({ getStore, getActions, setStore }) => {
-  return {
-    store: {
-      // Your existing store data
-      demo: [
-        {
-          title: "FIRST",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "SECOND",
-          background: "white",
-          initial: "white",
-        },
-      ],
-      contacts: [], // Initialize an empty array for contacts
-    },
-    actions: {
-      getContactList: async () => {
-        try {
-          const response = await fetch(
-            "https://playground.4geeks.com/contact/agendas/{Skomorac}/contacts",
-            {
-              method: "GET",
+  const createAgenda = async (skomorac) => {
+      try {
+          const response = await fetch(`https://playground.4geeks.com/contact/agendas/${skomorac}`, {
+              method: "POST",
               headers: {
-                "Content-Type": "application/json",
+                  "Content-Type": "application/json",
               },
-            }
-          );
+              body: JSON.stringify({ skomorac: skomorac }),
+          });
 
           if (!response.ok) {
-            throw new Error(
-              "Failed to retrieve contact list: " + response.statusText
-            );
+              throw new Error("Failed to create new agenda: " + response.statusText);
           }
+      } catch (error) {
+          console.error("Error creating agenda:", error.message);
+          throw new Error("Error creating agenda: " + error.message);
+      }
+  };
 
-          const data = await response.json();
-          setStore({ contacts: data.contacts }); // Assign fetched contacts to the contacts property
-        } catch (error) {
-          console.error("Error retrieving contact list:", error.message);
-          throw new Error("Error retrieving contact list: " + error.message);
-        }
+  return {
+      store: {
+          // Your existing store data
+          demo: [
+              {
+                  title: "FIRST",
+                  background: "white",
+                  initial: "white",
+              },
+              {
+                  title: "SECOND",
+                  background: "white",
+                  initial: "white",
+              },
+          ],
+          contacts: [], // Initialize an empty array for contacts
       },
+      actions: {
+          getContactList: async () => {
+              try {
+                  const response = await fetch("https://playground.4geeks.com/contact/agendas/{Skomorac}/contacts", {
+                      method: "GET",
+                      headers: {
+                          "Content-Type": "application/json",
+                      },
+                  });
 
+                  if (!response.ok) {
+                      throw new Error("Failed to retrieve contact list: " + response.statusText);
+                  }
+
+                  const data = await response.json();
+                  setStore({ contacts: data.contacts });
+              } catch (error) {
+                  console.error("Error retrieving contact list:", error.message);
+                  // Call createAgenda in case of error
+                  await createAgenda("{Skomorac}");
+                  throw new Error("Error retrieving contact list: " + error.message);
+              }
+          },  
       addContact: async (newContact) => {
         try {
           // Set agenda_slug for the new contact
